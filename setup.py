@@ -1,32 +1,30 @@
-# -*- coding: utf-8 -*-
-
+# -*- coding: utf-8 -*-                                                                                                                                                                                                                                              
 from setuptools import setup, find_packages
 
-
-with open('Readme.md') as f:
+with open("/home/amarchal/library/fBms/Readme.md") as f:
         readme = f.read()
+	
+with open("/home/amarchal/library/fBms/LICENSE") as f:
+	license = f.read()
 
-with open('LICENSE') as f:
-    license = f.read()
-    
 setup(
     name='fBms',
-    version='0.1.1',
-    description='Fractal Brownian motion',
+    version='0.1.8',
+    description='python interface package for ROHSA software',
     long_description=readme,
     classifiers=[
         'Development status :: 1 - Alpha',
         'License :: CC-By-SA2.0',
         'Programming Language :: Python',
-        'Topic :: Gaussian Random Field'
+        'Topic :: Data Analysis'
     ],
     author='Antoine Marchal',
-    author_email='amarchal@cita.utoronto.ca',
-    url='',
+    author_email='antoine.marchal@ias.u-psud.fr',
+    url='https://github.com/antoinemarchal/fBms',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=[
-        'numpy',
+            'numpy',
     ],
     include_package_data=True
 )
