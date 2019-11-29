@@ -1,0 +1,47 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def fftIndgen(n):
+    a = list(np.arange(0, n/2+1))
+    b = list(np.arange(1, n/2))
+    b.reverse()
+    b = [-i for i in b]
+    return a + b
+
+
+def fBm_2D(Pk = lambda k : k**-3.0, shape=(256,256)):
+    def Pk2(kx, ky):
+        if kx == 0 and ky == 0:
+            return 0.0
+        return np.sqrt(Pk(np.sqrt(kx**2 + ky**2)))
+    noise = np.fft.fft2(np.random.normal(size=shape))
+    amplitude = np.zeros(shape)
+    for i, kx in enumerate(fftIndgen(shape[0])):
+        for j, ky in enumerate(fftIndgen(shape[1])):
+            amplitude[i,j] = Pk2(kx, ky)
+    return np.fft.ifft2(noise * amplitude)
+
+
+def fBm_3D(Pk = lambda k : k**-3.0, shape=(256,256,256)):
+    def Pk2(kx, ky, kz):
+        if kx == 0 and ky == 0 and kz == 0:
+            return 0.0
+        return np.sqrt(Pk(np.sqrt(kx**2 + ky**2 + kz**2)))
+    noise = np.fft.fft2(np.random.normal(size=shape))
+    amplitude = np.zeros(shape)
+    for i, kx in enumerate(fftIndgen(shape[0])):
+        for j, ky in enumerate(fftIndgen(shape[1])):
+            for k, kz in enumerate(fftIndgen(shape[2])):
+                amplitude[i,j,k] = Pk2(kx, ky, kz)
+    return np.fft.ifftn(noise * amplitude)
+
+
+if __name__ == '__main__':
+    shape_2D = (128,128)
+    shape_3D = (128,128,128)
+
+    field_2D = fBm_2D(Pk = lambda k: np.power(k, -2.7), shape=shape_2D)
+    field_3D = fBm_3D(Pk = lambda k: np.power(k, -2.7), shape=shape_3D)
+
+
