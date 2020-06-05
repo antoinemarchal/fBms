@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-                                                                                                                                                                                                                                              
 from setuptools import setup, find_packages
 
-with open("/home/amarchal/library/fBms/Readme.md") as f:
+with open("Readme.md") as f:
         readme = f.read()
 	
-with open("/home/amarchal/library/fBms/LICENSE") as f:
+with open("LICENSE") as f:
 	license = f.read()
 
 setup(
     name='fBms',
-    version='0.1.8',
+    version='0.1.9',
     description='python interface package for ROHSA software',
     long_description=readme,
     classifiers=[
